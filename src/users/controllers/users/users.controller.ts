@@ -20,7 +20,7 @@ export class UsersController {
     // createUser(@Req() request: Request, @Res() response: Response) {
     createUser(@Body() userData: CreateUserDto) {
         // console.log(request.body);
-        console.log(userData);
+        console.log(this.usersService.createUser(userData));
         // response.send('User has been created');
         return { message: 'User has been created', data: userData };
     }
