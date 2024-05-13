@@ -18,6 +18,18 @@ export class UsersController {
         // response.send('User has been created');
         return {message: 'User has been created', data: userData};
     }
+    // Route handler for GET /users/find/:id
+    @Get('/find/:id')
+    findUser(@Req() request: Request, @Res() response: Response) {
+        const userId = request.params.id;
+        console.log(`Requested user ID: ${userId}`);
+        const userData = {
+            id: userId,
+            username: 'imhayatunnabi',
+            email: 'imhayatunnabi@gmail.com'
+        };
+        return response.json({ message: `User details retrieved successfully`, data: userData });
+    }
 
 
 }
