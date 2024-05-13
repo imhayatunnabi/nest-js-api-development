@@ -18,7 +18,7 @@ export class UsersController {
         // response.send('User has been created');
         return {message: 'User has been created', data: userData};
     }
-    // Route handler for GET /users/find/:id
+    // get one user by id route
     @Get('/find/:id')
     findUser(@Req() request: Request, @Res() response: Response) {
         const userId = request.params.id;
