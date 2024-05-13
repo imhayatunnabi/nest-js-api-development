@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
@@ -6,7 +6,10 @@ import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 export class UsersController {
     // get all users data routes
     @Get('/index')
-    getUsers() {
+    getUsers(@Query('sortBy') sortBy: string,
+        @Query('shortDirection') shortDirection: number,
+        @Query('page') page: number,
+        @Query('search') search: string) {
         return { username: 'imhayatunnabi', email: 'imhayatunnabi@gmail.com' }
     }
     //post a user to create a users
@@ -16,7 +19,7 @@ export class UsersController {
         // console.log(request.body);
         console.log(userData);
         // response.send('User has been created');
-        return {message: 'User has been created', data: userData};
+        return { message: 'User has been created', data: userData };
     }
     // get one user by id route
     @Get('/find/:id')
