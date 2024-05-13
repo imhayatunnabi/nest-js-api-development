@@ -1,16 +1,18 @@
 import { Body, Controller, Get, ParseIntPipe, Post, Query, Req, Res, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { UsersService } from '../../services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+    constructor(private usersService: UsersService) { }
     // get all users data routes
     @Get('/index')
     getUsers(@Query('sortBy') sortBy: string,
-        @Query('shortDirection') shortDirection: number,
-        @Query('page') ParseIntPipe,
+        @Query('sortDirection') sortDirection: string,
+        @Query('page') page: number,
         @Query('search') search: string) {
-        return { username: 'imhayatunnabi', email: 'imhayatunnabi@gmail.com' }
+        return this.usersService.getUsers(sortBy, sortDirection, page, search)
     }
     //post a user to create a users
     @Post('/store')
